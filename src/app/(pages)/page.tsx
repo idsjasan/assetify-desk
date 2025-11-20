@@ -34,7 +34,7 @@ export default function Home() {
   return (
     <div className="flex h-dvh flex-col items-center justify-center gap-spacing-700">
       <div className="flex flex-col items-center justify-center gap-spacing-200">
-        <span className="text-display font-bold">
+        <span className="font-bold text-display">
           Assetify <span className="text-core-accent">Desk.</span>
         </span>
         <span className="text-body text-content-standard-secondary">
@@ -44,16 +44,16 @@ export default function Home() {
       <div className="mb-spacing-1000 flex max-w-64 flex-col items-center justify-center gap-spacing-500 md:flex-row">
         <Link
           href="/ask-form"
-          className="flex w-full shrink-0 flex-col items-start justify-center gap-spacing-100 rounded-radius-700 border border-line-outline bg-components-fill-standard-primary p-spacing-500 text-content-standard-primary-primary duration-100 cursor-pointer hover:opacity-75 active:scale-95 active:opacity-50"
+          className="flex w-full shrink-0 cursor-pointer flex-col items-start justify-center gap-spacing-100 rounded-radius-700 border border-line-outline bg-components-fill-standard-primary p-spacing-500 text-content-standard-primary-primary duration-100 hover:opacity-75 active:scale-95 active:opacity-50"
         >
-          <span className="text-heading font-semibold">문의하기</span>
+          <span className="font-semibold text-heading">문의하기</span>
           <span className="text-label">자산 관련 문의 사항이 있는 경우</span>
         </Link>
         <Link
           href="/repair-form"
-          className="flex w-full shrink-0 flex-col items-start justify-center gap-spacing-100 rounded-radius-700 border border-line-outline bg-components-fill-standard-primary p-spacing-500 text-content-standard-primary-primary duration-100 cursor-pointer hover:opacity-75 active:scale-95 active:opacity-50"
+          className="flex w-full shrink-0 cursor-pointer flex-col items-start justify-center gap-spacing-100 rounded-radius-700 border border-line-outline bg-components-fill-standard-primary p-spacing-500 text-content-standard-primary-primary duration-100 hover:opacity-75 active:scale-95 active:opacity-50"
         >
-          <span className="text-heading font-semibold">수리 요청하기</span>
+          <span className="font-semibold text-heading">수리 요청하기</span>
           <span className="text-label">
             하드웨어 고장으로 수리가 필요한 경우
           </span>

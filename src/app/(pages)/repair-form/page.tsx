@@ -1,7 +1,7 @@
 export default function RepairForm() {
   return (
-    <div className="h-dvh flex justify-center items-center">
-      <span className="text-display font-semibold">Repair Form</span>
+    <div className="flex h-dvh items-center justify-center">
+      <span className="font-semibold text-display">Repair Form</span>
     </div>
   );
 }
