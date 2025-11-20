@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import type React from "react";
-import { Providers } from "../lib/providers";
+import { Providers } from "@/lib/providers";
 
 export const metadata: Metadata = {
   title: "Assetify Desk",
