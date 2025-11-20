@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import type React from "react";
+import { Providers } from "../lib/providers";
 
 export const metadata: Metadata = {
   title: "Assetify Desk",
@@ -14,7 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }
