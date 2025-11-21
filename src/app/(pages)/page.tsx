@@ -41,17 +41,17 @@ export default function Home() {
           간편하게 문의하고, 진행 상황을 확인해 보세요
         </span>
       </div>
-      <div className="mb-spacing-1000 flex max-w-64 flex-col items-center justify-center gap-spacing-500 md:flex-row">
+      <div className="mb-spacing-1000 flex w-full max-w-[768px] flex-col items-center justify-center gap-spacing-500 p-spacing-700 md:flex-row">
         <Link
           href="/ask-form"
-          className="flex w-full shrink-0 cursor-pointer flex-col items-start justify-center gap-spacing-100 rounded-radius-700 border border-line-outline bg-components-fill-standard-primary p-spacing-500 text-content-standard-primary-primary duration-100 hover:opacity-75 active:scale-95 active:opacity-50"
+          className="flex w-full cursor-pointer flex-col items-start justify-center gap-spacing-100 rounded-radius-700 border border-line-outline bg-components-fill-standard-primary p-spacing-500 text-content-standard-primary-primary duration-100 hover:opacity-75 active:scale-95 active:opacity-50"
         >
           <span className="font-semibold text-heading">문의하기</span>
           <span className="text-label">자산 관련 문의 사항이 있는 경우</span>
         </Link>
         <Link
           href="/repair-form"
-          className="flex w-full shrink-0 cursor-pointer flex-col items-start justify-center gap-spacing-100 rounded-radius-700 border border-line-outline bg-components-fill-standard-primary p-spacing-500 text-content-standard-primary-primary duration-100 hover:opacity-75 active:scale-95 active:opacity-50"
+          className="flex w-full cursor-pointer flex-col items-start justify-center gap-spacing-100 rounded-radius-700 border border-line-outline bg-components-fill-standard-primary p-spacing-500 text-content-standard-primary-primary duration-100 hover:opacity-75 active:scale-95 active:opacity-50"
         >
           <span className="font-semibold text-heading">수리 요청하기</span>
           <span className="text-label">
