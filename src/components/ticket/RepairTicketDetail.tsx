@@ -133,7 +133,7 @@ export default function RepairTicketDetailView({
         <div className="flex w-full max-w-[768px] flex-wrap gap-spacing-500">
           <div className="flex min-w-[220px] flex-1 flex-col gap-spacing-100 rounded-radius-700 border border-line-outline bg-components-fill-standard-primary p-spacing-400">
             <span className="text-content-standard-tertiary text-label">
-              과실여부
+              과실 여부
             </span>
             <span className="font-semibold text-content-standard-primary text-heading">
               {formatValue(detail.liability)}
@@ -184,7 +184,7 @@ export default function RepairTicketDetailView({
             <DetailRow label="문의자" value={detail.requester} />
             <DetailRow label="담당 팀" value={detail.team} />
             <DetailRow label="실제 근무 위치" value={detail.location} />
-            <DetailRow label="자산번호" value={detail.assetNumber} />
+            <DetailRow label="자산 번호" value={detail.assetNumber} />
             <DetailRow label="고장 내역" value={detail.issueTypes} />
             <DetailRow label="고장 증상" value={detail.detail} />
             <DetailRow label="첨부파일" value={detail.attachments} />

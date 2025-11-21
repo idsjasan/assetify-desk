@@ -54,7 +54,7 @@ export default function RepairFormView({
 
   const corporationOptions = useMemo(
     () => [
-      { label: "선택해주세요", value: "", disabled: true },
+      { label: "선택해 주세요", value: "", disabled: true },
       ...options.corporations.map((name) => ({ label: name, value: name })),
     ],
     [options.corporations],
@@ -62,7 +62,7 @@ export default function RepairFormView({
 
   const issueOptions = useMemo(
     () => [
-      { label: "선택해주세요", value: "", disabled: true },
+      { label: "선택해 주세요", value: "", disabled: true },
       ...options.issueTypes.map((name) => ({ label: name, value: name })),
     ],
     [options.issueTypes],
@@ -141,8 +141,8 @@ export default function RepairFormView({
           title="실제 근무 위치"
           description="ex. 용인연구소 → 경기 용인시 처인구 포곡읍 두계로 72
       향남공장 → 경기 화성시 향남읍 제약공단4길 35-14
-      본사/신관/S빌딩은 신관 3층 자산관리파트에서 직접 수리요청 받고있습니다.
-      본사/신관/S빌딩 근무하시는 분들은 “본사”로 기입해주시기바랍니다."
+      본사/신관/S빌딩은 신관 3층 자산관리파트에서 직접 수리 요청 받고 있습니다.
+      본사/신관/S빌딩 근무하시는 분들은 “본사”로 기재해 주시기 바랍니다."
         >
           <TextInput
             id="repair-location"
@@ -154,8 +154,8 @@ export default function RepairFormView({
         </FormField>
 
         <FormField
-          title="자산번호"
-          description="사용중인 기기에 붙어있는 자산번호를 적어주세요."
+          title="자산 번호"
+          description="사용중인 기기에 붙어있는 자산 번호를 적어주세요."
         >
           <TextInput
             id="repair-asset-number"
@@ -168,7 +168,7 @@ export default function RepairFormView({
 
         <FormField
           title="고장 내역"
-          description="해당되는 고장 유형을 선택해주세요."
+          description="해당하는 고장 유형을 선택해 주세요."
         >
           <SelectInput
             id="repair-issue-type"
@@ -182,7 +182,7 @@ export default function RepairFormView({
 
         <FormField
           title="고장 증상"
-          description="현재 고장 증상을 구체적으로 입력해주세요."
+          description="현재 고장 증상을 구체적으로 입력해 주세요."
           required
         >
           <RichTextInput
@@ -197,13 +197,13 @@ export default function RepairFormView({
 
         <FormField
           title="참고 자료"
-          description="각종 첨부 파일을 업로드 하실 수 있습니다."
+          description="각종 첨부 파일을 올릴 수 있습니다."
         >
           <FileUploadInput
             key={fileInputKey}
             id="repair-reference-file"
             accept=".pdf,image/*"
-            hint="대외비 등 민감한 자료는 업로드하지 마세요."
+            hint="대외비 등 민감한 자료는 올리지 마세요."
             multiple
             onFilesSelected={(files) =>
               updateField(
@@ -232,9 +232,9 @@ export default function RepairFormView({
 
         <FormField
           title="수리 진행 동의"
-          description="수리 진행시 수리 비용이 청구되며
-사용자 과실이 판단되지 않을경우 법인에서 100%를 지불하며,
-사용자 과실이 명확 할 경우 사용자에게 수리비의 50%가 청구됩니다.(법인 50% 부담)"
+          description="수리 진행 시 수리 비용이 청구되며
+사용자 과실이 판단되지 않으면 법인에서 100%를 지불하며,
+사용자 과실이 명확할 경우 사용자에게 수리비의 50%가 청구됩니다. (법인 50% 부담)"
           required
         >
           <label className="flex items-center gap-spacing-200 text-body text-content-standard-primary">

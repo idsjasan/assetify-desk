@@ -56,7 +56,7 @@ export default function AskFormView({
 
   const corporationOptions = useMemo(
     () => [
-      { label: "선택해주세요", value: "", disabled: true },
+      { label: "선택해 주세요", value: "", disabled: true },
       ...options.corporations.map((name) => ({ label: name, value: name })),
     ],
     [options.corporations],
@@ -139,8 +139,8 @@ export default function AskFormView({
         </FormField>
 
         <FormField
-          title="자산번호"
-          description="사용중인 기기에 붙어있는 자산번호를 적어주세요."
+          title="자산 번호"
+          description="사용중인 기기에 붙어있는 자산 번호를 적어주세요."
         >
           <TextInput
             id="assetNumber"
@@ -168,7 +168,7 @@ export default function AskFormView({
 
         <FormField
           title="문의 내용"
-          description="필요한 도움이나 요청 사항을 구체적으로 입력해주세요."
+          description="필요한 도움이나 요청 사항을 구체적으로 입력해 주세요."
           required
         >
           <RichTextInput
@@ -183,13 +183,13 @@ export default function AskFormView({
 
         <FormField
           title="참고 자료"
-          description="각종 첨부 파일을 업로드 하실 수 있습니다."
+          description="각종 첨부 파일을 올릴 수 있습니다."
         >
           <FileUploadInput
             key={fileInputKey}
             id="reference-file"
             accept=".pdf,image/*"
-            hint="대외비 등 민감한 자료는 업로드하지 마세요."
+            hint="대외비 등 민감한 자료는 올리지 마세요."
             multiple
             onFilesSelected={(files) =>
               updateField(

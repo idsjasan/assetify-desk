@@ -126,7 +126,7 @@ export default function AskTicketDetailView({
             <DetailRow label="법인" value={detail.corporation} />
             <DetailRow label="부서" value={detail.department} />
             <DetailRow label="문의자" value={detail.requester} />
-            <DetailRow label="자산번호" value={detail.assetNumber} />
+            <DetailRow label="자산 번호" value={detail.assetNumber} />
             <DetailRow label="문의 유형" value={detail.inquiryType} />
             <DetailRow label="문의 내용" value={detail.detail} />
             <DetailRow label="첨부파일" value={detail.attachments} />

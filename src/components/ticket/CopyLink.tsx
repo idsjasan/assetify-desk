@@ -11,7 +11,7 @@ type CopyLinkProps = {
 };
 
 export default function CopyLink({
-  label = "이 링크를 통해 진행상황을 확인할 수 있어요",
+  label = "이 링크를 통해 진행 상황을 확인할 수 있어요",
   buttonText = "링크 복사하기",
   successText = "복사되었습니다!",
 }: CopyLinkProps = {}) {

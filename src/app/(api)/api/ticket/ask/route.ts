@@ -87,7 +87,7 @@ export async function POST(request: Request) {
       !isNonEmpty(payload.requester)
     ) {
       return NextResponse.json(
-        { error: "필수 항목을 모두 입력해주세요." },
+        { error: "필수 항목을 모두 입력해 주세요." },
         { status: 400 },
       );
     }
