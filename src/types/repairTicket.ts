@@ -1,0 +1,24 @@
+export type RepairTicketDetail = {
+  id: string;
+  url: string | null;
+  createdTime: string;
+  lastEditedTime: string;
+  archived?: boolean;
+  detail?: string;
+  corporation?: string;
+  team?: string;
+  urgency?: string;
+  issueTypes?: string[];
+  assetNumber?: string;
+  department?: string;
+  requester?: string;
+  location?: string;
+  status?: string;
+  progressStatus?: string;
+  assignee?: string;
+  attachments?: string[];
+  actionNotes?: string;
+  liability?: string;
+  schedule?: string;
+  price?: string;
+};

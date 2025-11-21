@@ -12,41 +12,39 @@ import {
   TextInput,
 } from "@/components/form/form-fields";
 import {
-  useAskFormOptions,
-  useAskFormResult,
-  useAskFormState,
-  useSubmitAskForm,
-} from "@/hooks/useAskForm";
-import { type AskFormOptions, initialAskFormOptions } from "@/store/askForm";
+  useRepairFormOptions,
+  useRepairFormResult,
+  useRepairFormState,
+  useSubmitRepairForm,
+} from "@/hooks/useRepairForm";
+import {
+  initialRepairFormOptions,
+  type RepairFormOptions,
+} from "@/store/repairForm";
 
-const inquiryTypeDescriptions: Record<string, string> = {
-  "PC/OA": "일반 하드웨어/ 소프트웨어 관련 문의",
-  "인프라/보안시스템": "베어독/보안프로그램 관련 문의",
-};
-
-type AskFormViewProps = {
-  initialOptions?: AskFormOptions;
+type RepairFormViewProps = {
+  initialOptions?: RepairFormOptions;
   initialError?: string | null;
 };
 
-export default function AskFormView({
+export default function RepairFormView({
   initialOptions,
   initialError,
-}: AskFormViewProps) {
+}: RepairFormViewProps) {
   const router = useRouter();
   const [fileInputKey, setFileInputKey] = useState(0);
-  const { formState, updateField } = useAskFormState();
-  const { result } = useAskFormResult();
-  const optionsQuery = useAskFormOptions(initialOptions);
-  const submitMutation = useSubmitAskForm({
+  const { formState, updateField } = useRepairFormState();
+  const { result } = useRepairFormResult();
+  const optionsQuery = useRepairFormOptions(initialOptions);
+  const submitMutation = useSubmitRepairForm({
     onSuccess: (data) => {
       setFileInputKey((prev) => prev + 1);
-      router.push(`/ticket/ask/${data.id}`);
+      router.push(`/ticket/repair/${data.id}`);
     },
   });
 
   const hasOptions = Boolean(optionsQuery.data);
-  const options = optionsQuery.data ?? initialAskFormOptions;
+  const options = optionsQuery.data ?? initialRepairFormOptions;
   const optionsError = hasOptions
     ? null
     : optionsQuery.isError
@@ -62,14 +60,12 @@ export default function AskFormView({
     [options.corporations],
   );
 
-  const inquiryOptions = useMemo(
-    () =>
-      options.inquiryTypes.map((name) => ({
-        label: name,
-        value: name,
-        description: inquiryTypeDescriptions[name],
-      })),
-    [options.inquiryTypes],
+  const issueOptions = useMemo(
+    () => [
+      { label: "선택해주세요", value: "", disabled: true },
+      ...options.issueTypes.map((name) => ({ label: name, value: name })),
+    ],
+    [options.issueTypes],
   );
 
   const urgencyOptions = useMemo(
@@ -83,20 +79,23 @@ export default function AskFormView({
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!isOptionsReady || submitMutation.isPending) return;
+    if (!isOptionsReady || submitMutation.isPending || !formState.consent) {
+      return;
+    }
     submitMutation.mutate(formState);
   };
 
-  const isSubmitDisabled = submitMutation.isPending || !isOptionsReady;
+  const isSubmitDisabled =
+    submitMutation.isPending || !isOptionsReady || !formState.consent;
 
   return (
     <div className="flex flex-col items-center justify-start gap-spacing-700 px-spacing-700 py-spacing-900">
       <span className="font-semibold text-display">
-        Ask Form<span className="text-core-accent">.</span>
+        Repair Form<span className="text-core-accent">.</span>
       </span>
 
       {optionsError ? (
-        <span className="text-core-status-negative text-label">
+        <span className="text-core-status-warning text-label">
           {optionsError} 다시 시도해주세요.
         </span>
       ) : null}
@@ -107,12 +106,12 @@ export default function AskFormView({
       >
         <FormField
           title="법인"
-          description="현재 소속되어계신 법인을 입력해주세요."
+          description="현재 소속된 법인을 선택해주세요."
           required
         >
           <SelectInput
-            id="corporation"
-            name="corporation"
+            id="repair-corporation"
+            name="repair-corporation"
             value={formState.corporation}
             onChange={(event) => updateField("corporation", event.target.value)}
             options={corporationOptions}
@@ -126,8 +125,8 @@ export default function AskFormView({
           description="현재 소속되어계신 부서를 입력해주세요."
         >
           <TextInput
-            id="department"
-            name="department"
+            id="repair-department"
+            name="repair-department"
             placeholder="ex. 경영지원팀"
             value={formState.department}
             onChange={(event) => updateField("department", event.target.value)}
@@ -140,8 +139,8 @@ export default function AskFormView({
           required
         >
           <TextInput
-            id="requester"
-            name="requester"
+            id="repair-requester"
+            name="repair-requester"
             placeholder="ex. 김자산"
             value={formState.requester}
             onChange={(event) => updateField("requester", event.target.value)}
@@ -150,12 +149,25 @@ export default function AskFormView({
         </FormField>
 
         <FormField
-          title="자산번호"
-          description="사용중인 기기에 붙어있는 자산번호를 적어주세요."
+          title="실제 근무 위치"
+          description="엔지니어 방문이 필요한 경우 위치를 알려주세요."
         >
           <TextInput
-            id="assetNumber"
-            name="assetNumber"
+            id="repair-location"
+            name="repair-location"
+            placeholder="서울시 강남구 ..."
+            value={formState.location}
+            onChange={(event) => updateField("location", event.target.value)}
+          />
+        </FormField>
+
+        <FormField
+          title="자산번호"
+          description="수리가 필요한 자산번호를 적어주세요."
+        >
+          <TextInput
+            id="repair-asset-number"
+            name="repair-asset-number"
             placeholder="ex. 2309-N0001"
             value={formState.assetNumber}
             onChange={(event) => updateField("assetNumber", event.target.value)}
@@ -163,29 +175,28 @@ export default function AskFormView({
         </FormField>
 
         <FormField
-          title="문의 유형"
-          required
-          description="필요하신 지원 유형을 골라주세요."
+          title="고장 내역"
+          description="해당되는 고장 유형을 선택해주세요."
         >
-          <RadioSelect
-            name="request-type"
-            value={formState.inquiryType}
-            onChange={(nextValue) => updateField("inquiryType", nextValue)}
-            required
-            options={inquiryOptions}
+          <SelectInput
+            id="repair-issue-type"
+            name="repair-issue-type"
+            value={formState.issueType}
+            onChange={(event) => updateField("issueType", event.target.value)}
+            options={issueOptions}
             disabled={!isOptionsReady}
           />
         </FormField>
 
         <FormField
-          title="문의 내용"
+          title="고장 증상"
           description="필요한 도움이나 요청 사항을 구체적으로 입력해주세요."
           required
         >
           <RichTextInput
-            id="detail"
-            name="detail"
-            placeholder="상세히 적어주실수록 더욱 빠른 처리가 가능합니다."
+            id="repair-detail"
+            name="repair-detail"
+            placeholder="고장 증상, 최근 조치 내용 등을 자세히 적어주세요."
             value={formState.detail}
             onChange={(event) => updateField("detail", event.target.value)}
             required
@@ -198,7 +209,7 @@ export default function AskFormView({
         >
           <FileUploadInput
             key={fileInputKey}
-            id="reference-file"
+            id="repair-reference-file"
             accept=".pdf,image/*"
             hint="대외비 등 민감한 자료는 업로드하지 마세요."
             multiple
@@ -218,13 +229,30 @@ export default function AskFormView({
 
         <FormField title="긴급도" required>
           <RadioSelect
-            name="urgency"
+            name="repair-urgency"
             value={formState.urgency}
             onChange={(nextValue) => updateField("urgency", nextValue)}
             required
             options={urgencyOptions}
             disabled={!isOptionsReady}
           />
+        </FormField>
+
+        <FormField
+          title="수리 진행 동의"
+          description="수리 진행을 위해서는 동의가 필요합니다."
+          required
+        >
+          <label className="flex items-center gap-spacing-200 text-body text-content-standard-primary">
+            <input
+              type="checkbox"
+              className="h-spacing-400 w-spacing-400 cursor-pointer accent-core-accent"
+              checked={formState.consent}
+              onChange={(event) => updateField("consent", event.target.checked)}
+              required
+            />
+            위 내용을 확인했고 수리 진행에 동의합니다.
+          </label>
         </FormField>
 
         <button

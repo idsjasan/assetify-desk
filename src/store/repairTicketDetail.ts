@@ -1,8 +1,8 @@
 import { atom } from "jotai";
 
-import type { AskTicketDetail } from "@/types/askTicket";
+import type { RepairTicketDetail } from "@/types/repairTicket";
 
-export const askTicketDetailAtom = atom<AskTicketDetail | null>(null);
+export const repairTicketDetailAtom = atom<RepairTicketDetail | null>(null);
 
 export const cancelStatusAtom = atom<{
   state: "idle" | "pending" | "success" | "error";

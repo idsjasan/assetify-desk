@@ -1,9 +1,21 @@
-export default function RepairTicket() {
-  return (
-    <div className="flex h-dvh items-center justify-center">
-      <span className="font-semibold text-display">
-        Repair Ticket<span className="text-core-accent">.</span>
-      </span>
-    </div>
-  );
+import { notFound } from "next/navigation";
+
+import RepairTicketDetailView from "@/components/ticket/RepairTicketDetail";
+import { fetchRepairTicketDetail } from "@/utils/notion/repair";
+
+export default async function RepairTicketDetailPage(props: {
+  params: Promise<{ ticketId: string }>;
+}) {
+  const { ticketId } = await props.params;
+  if (!ticketId) {
+    notFound();
+  }
+
+  try {
+    const ticket = await fetchRepairTicketDetail(ticketId);
+    return <RepairTicketDetailView ticketId={ticketId} initialData={ticket} />;
+  } catch (error) {
+    console.error("Failed to load repair ticket", error);
+    notFound();
+  }
 }
