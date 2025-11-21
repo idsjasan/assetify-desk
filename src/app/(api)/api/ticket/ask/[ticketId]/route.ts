@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { fetchAskTicketDetail } from "../notion-helpers";
+import { fetchAskTicketDetail } from "@/utils/notion/ask";
 
 type RouteContext = {
   params: { ticketId: string };
@@ -10,7 +10,10 @@ export async function GET(_: Request, context: RouteContext) {
   const ticketId = context.params.ticketId;
 
   if (!ticketId) {
-    return NextResponse.json({ error: "ticketId가 필요합니다." }, { status: 400 });
+    return NextResponse.json(
+      { error: "ticketId가 필요합니다." },
+      { status: 400 },
+    );
   }
 
   try {

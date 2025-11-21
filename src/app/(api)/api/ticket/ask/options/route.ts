@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-import { loadAskSelectOptions } from "../notion-helpers";
+import { loadAskSelectOptions } from "@/utils/notion/ask";
 
 export async function GET() {
   try {

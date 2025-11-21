@@ -10,6 +10,7 @@ export const notionHeaders = {
 };
 
 const NOTION_BASE_URL = "https://api.notion.com/v1";
+export const NOTION_PAGES_ENDPOINT = `${NOTION_BASE_URL}/pages`;
 
 type NotionSelectOption = {
   name?: string | null;
@@ -191,7 +192,7 @@ const getFileNames = (property?: NotionPropertyValue) =>
 export async function fetchAskTicketDetail(
   ticketId: string,
 ): Promise<AskTicketDetail> {
-  const response = await fetch(`${NOTION_BASE_URL}/pages/${ticketId}`, {
+  const response = await fetch(`${NOTION_PAGES_ENDPOINT}/${ticketId}`, {
     method: "GET",
     cache: "no-store",
     headers: notionHeaders,
@@ -219,6 +220,7 @@ export async function fetchAskTicketDetail(
     url: data.url ?? null,
     createdTime: data.created_time,
     lastEditedTime: data.last_edited_time,
+    archived: data.archived ?? false,
     detail: getPlainText(getProp("title")),
     corporation: getSelectName(getProp("corporation")),
     inquiryType: getSelectName(getProp("inquiryType")),
@@ -230,4 +232,51 @@ export async function fetchAskTicketDetail(
     assignee: getPeopleNames(getProp("assignee"))?.join(", "),
     attachments: getFileNames(getProp("attachments")),
   };
+}
+
+export async function updateAskTicketStatus(
+  ticketId: string,
+  statusName: string,
+) {
+  const response = await fetch(`${NOTION_PAGES_ENDPOINT}/${ticketId}`, {
+    method: "PATCH",
+    headers: notionHeaders,
+    body: JSON.stringify({
+      properties: {
+        [ASK_FIELD_NAMES.status]: {
+          status: {
+            name: statusName,
+          },
+        },
+      },
+    }),
+  });
+
+  const data = await response.json();
+  if (!response.ok) {
+    const message =
+      typeof data?.message === "string"
+        ? data.message
+        : "문의 상태를 업데이트하지 못했습니다.";
+    throw new Error(message);
+  }
+
+  return data;
+}
+
+export async function deleteAskTicket(ticketId: string) {
+  const response = await fetch(`${NOTION_PAGES_ENDPOINT}/${ticketId}`, {
+    method: "PATCH",
+    headers: notionHeaders,
+    body: JSON.stringify({ archived: true }),
+  });
+
+  if (!response.ok) {
+    const data = await response.json();
+    const message =
+      typeof data?.message === "string"
+        ? data.message
+        : "문의 삭제에 실패했습니다.";
+    throw new Error(message);
+  }
 }

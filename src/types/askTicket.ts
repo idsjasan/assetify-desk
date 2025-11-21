@@ -3,6 +3,7 @@ export type AskTicketDetail = {
   url: string | null;
   createdTime: string;
   lastEditedTime: string;
+  archived?: boolean;
   detail?: string;
   corporation?: string;
   inquiryType?: string;

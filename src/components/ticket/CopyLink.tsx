@@ -28,12 +28,12 @@ export default function CopyLink({
   };
 
   return (
-    <p className="text-label text-content-standard-secondary">
+    <p className="text-content-standard-secondary text-label">
       {label}{" "}
       <button
         type="button"
         onClick={handleCopy}
-        className="inline text-core-accent underline underline-offset-4 duration-100 hover:opacity-75 active:opacity-50 active:scale-95"
+        className="inline text-core-accent underline underline-offset-4 duration-100 hover:opacity-75 active:scale-95 active:opacity-50"
       >
         {status === "copied" ? successText : buttonText}
       </button>

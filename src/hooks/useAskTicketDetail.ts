@@ -1,14 +1,15 @@
-'use client';
-
-import { useEffect } from "react";
+"use client";
 
 import { useQuery } from "@tanstack/react-query";
 import { useSetAtom } from "jotai";
+import { useEffect } from "react";
 
 import { askTicketDetailAtom } from "@/store/askTicketDetail";
 import type { AskTicketDetail } from "@/types/askTicket";
 
-const fetchTicketDetail = async (ticketId: string): Promise<AskTicketDetail> => {
+const fetchTicketDetail = async (
+  ticketId: string,
+): Promise<AskTicketDetail> => {
   const response = await fetch(`/api/ticket/ask/${ticketId}`, {
     cache: "no-store",
   });

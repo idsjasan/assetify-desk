@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 
 import AskTicketDetailView from "@/components/ticket/AskTicketDetail";
-import { fetchAskTicketDetail } from "@/app/(api)/api/ticket/ask/notion-helpers";
+import { fetchAskTicketDetail } from "@/utils/notion/ask";
 
 export default async function AskTicketDetailPage(props: {
   params: Promise<{ ticketId: string }>;

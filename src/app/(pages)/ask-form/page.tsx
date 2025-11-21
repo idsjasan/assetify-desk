@@ -10,7 +10,7 @@ import {
   RichTextInput,
   SelectInput,
   TextInput,
-} from "@/components/ask-form/form-fields";
+} from "@/components/form/form-fields";
 import {
   useAskFormOptions,
   useAskFormResult,
@@ -223,14 +223,6 @@ export default function AskForm() {
           {submitMutation.isPending ? "제출 중..." : "제출하기"}
         </button>
 
-        {result?.id ? (
-          <span
-            className="text-core-status-positive text-label"
-            aria-live="polite"
-          >
-            요청이 등록되었습니다. ID: {result.id}
-          </span>
-        ) : null}
         {result?.error ? (
           <span
             className="text-core-status-negative text-label"

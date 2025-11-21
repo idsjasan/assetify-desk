@@ -11,7 +11,7 @@ import {
   loadAskSelectOptions,
   notionHeaders,
   sanitizeText,
-} from "./notion-helpers";
+} from "@/utils/notion/ask";
 
 const NOTION_PAGES_ENDPOINT = "https://api.notion.com/v1/pages";
 
