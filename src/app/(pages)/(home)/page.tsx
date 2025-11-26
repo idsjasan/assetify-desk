@@ -1,14 +1,10 @@
 import MenuButton from "@/app/(pages)/(home)/(components)/menuButton";
+import Header from "@/shared/components/header";
 
 export default function Home() {
   return (
     <div className="flex w-full flex-col items-center justify-start gap-spacing-700 px-spacing-400 py-spacing-700 md:h-dvh md:justify-center">
-      <span className="font-semibold text-display">
-        Assetify{" "}
-        <span className="bg-gradient-to-r from-core-accent to-solid-red bg-clip-text text-title text-transparent md:text-display">
-          Desk.
-        </span>
-      </span>
+      <Header title="Assetify" highlighted="Desk" />
       <div className="grid w-full max-w-3xl grid-cols-1 gap-spacing-400 md:grid-cols-2">
         <MenuButton
           href="/inquiry"
