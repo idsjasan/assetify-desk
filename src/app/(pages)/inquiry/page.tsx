@@ -9,8 +9,10 @@ import {
   법인Atom,
   부서Atom,
   자산번호Atom,
+  첨부파일Atom,
 } from "@/app/(pages)/inquiry/(atoms)/useInquiryFormStore";
 import { useInquiryOptions } from "@/app/(pages)/inquiry/(hooks)/useInquiryOptions";
+import { FileInput } from "@/shared/components/form/file-input";
 import {
   FormField,
   FormFieldList,
@@ -18,7 +20,7 @@ import {
   RichTextInput,
   SelectOption,
   TextInput,
-} from "@/shared/components/form-fields";
+} from "@/shared/components/form/form-fields";
 import Header from "@/shared/components/header";
 
 export default function Inquiry() {
@@ -97,6 +99,16 @@ export default function Inquiry() {
             required
             value={문의내용}
             onChange={set문의내용}
+          />
+        </FormField>
+        <FormField
+          title="첨부 파일"
+          description="대외비 등 민감한 자료는 업로드하지 마세요."
+        >
+          <FileInput
+            atom={첨부파일Atom}
+            accept="image/*,.pdf,.doc,.docx,xlsx,.hwp"
+            multiple
           />
         </FormField>
         <FormField title="긴급도" required>
