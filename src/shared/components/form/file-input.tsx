@@ -14,7 +14,7 @@ interface FileInputProps
 
 const isDraggingAtom = atom(false);
 
-export function FileInput({
+export default function FileInput({
   atom: filesAtom,
   accept,
   multiple = false,

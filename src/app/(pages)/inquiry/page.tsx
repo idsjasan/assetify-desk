@@ -11,8 +11,9 @@ import {
   자산번호Atom,
   첨부파일Atom,
 } from "@/app/(pages)/inquiry/(atoms)/useInquiryFormStore";
+import { useInquiryForm } from "@/app/(pages)/inquiry/(hooks)/useInquiryForm";
 import { useInquiryOptions } from "@/app/(pages)/inquiry/(hooks)/useInquiryOptions";
-import { FileInput } from "@/shared/components/form/file-input";
+import FileInput from "@/shared/components/form/file-input";
 import {
   FormField,
   FormFieldList,
@@ -21,6 +22,7 @@ import {
   SelectOption,
   TextInput,
 } from "@/shared/components/form/form-fields";
+import SubmitButton from "@/shared/components/form/submit-button";
 import Header from "@/shared/components/header";
 
 export default function Inquiry() {
@@ -32,6 +34,8 @@ export default function Inquiry() {
   const [문의유형, set문의유형] = useAtom(문의유형Atom);
   const [문의내용, set문의내용] = useAtom(문의내용Atom);
   const [긴급도, set긴급도] = useAtom(긴급도Atom);
+
+  const { isSubmitting, handleSubmit } = useInquiryForm();
 
   if (isLoading) {
     return "로딩중";
@@ -50,6 +54,7 @@ export default function Inquiry() {
             options={options?.법인 || []}
             value={법인}
             onChange={set법인명}
+            required
           />
         </FormField>
         <FormField title="부서">
@@ -57,7 +62,6 @@ export default function Inquiry() {
             placeholder="ex. 경영지원팀 or 자산관리파트"
             value={부서}
             onChange={set부서}
-            required
           />
         </FormField>
         <FormField title="문의자 성함" required>
@@ -119,6 +123,11 @@ export default function Inquiry() {
             required
           />
         </FormField>
+        <SubmitButton
+          text="제출하기"
+          onSubmit={handleSubmit}
+          isLoading={isSubmitting}
+        />
       </FormFieldList>
     </div>
   );
