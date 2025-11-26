@@ -500,6 +500,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@notionhq/client@npm:^5.4.0":
+  version: 5.4.0
+  resolution: "@notionhq/client@npm:5.4.0"
+  checksum: 10c0/ff2e5fbf0e4e96c4c42fe95993d09c685c01d7dadd8298b61e0ed546d7c6a0fd6f11aeb3d750ad2f19375a3ff357dda38862fe53df84d4c23f4ba6bd38cfe490
+  languageName: node
+  linkType: hard
+
 "@swc/helpers@npm:0.5.15":
   version: 0.5.15
   resolution: "@swc/helpers@npm:0.5.15"
@@ -808,6 +815,7 @@ __metadata:
   resolution: "assetify-desk@workspace:."
   dependencies:
     "@biomejs/biome": "npm:2.2.0"
+    "@notionhq/client": "npm:^5.4.0"
     "@tailwindcss/postcss": "npm:^4"
     "@tanstack/react-query": "npm:^5.90.10"
     "@tanstack/react-query-devtools": "npm:^5.90.2"
