@@ -52,7 +52,7 @@ export const useInquiryForm = (): UseInquiryFormReturn => {
       return data;
     },
     onSuccess: (data) => {
-      router.push(`/inquiry/ticket/${data.id}`);
+      router.push(`/inquiry/ticket/${data.ticketId}`);
     },
   });
 

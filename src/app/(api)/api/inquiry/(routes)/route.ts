@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import type { InquiryPageData } from "@/app/(api)/api/inquiry/types";
+import type { InquiryCreatePageData } from "@/app/(api)/api/inquiry/types";
 import { notionRequest } from "@/shared/lib/notion";
 
 export async function POST(request: Request) {
@@ -29,13 +29,16 @@ export async function POST(request: Request) {
       },
     };
 
-    const notionResponse = await notionRequest<InquiryPageData>("/pages", {
-      method: "POST",
-      body,
-    });
+    const notionResponse = await notionRequest<InquiryCreatePageData>(
+      "/pages",
+      {
+        method: "POST",
+        body,
+      },
+    );
 
     const response = {
-      id: notionResponse.id,
+      ticketId: notionResponse.id,
     };
 
     return NextResponse.json(response);

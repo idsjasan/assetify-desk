@@ -218,7 +218,7 @@ export interface InquiryRetrieveData {
   request_id: string;
 }
 
-export interface InquiryPageData {
+export interface InquiryCreatePageData {
   object: "page";
   id: string;
   created_time: string;
