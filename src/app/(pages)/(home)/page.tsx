@@ -1,5 +1,5 @@
 import MenuButton from "@/app/(pages)/(home)/(components)/menuButton";
-import Header from "@/shared/components/header";
+import Header from "@/shared/components/common/header";
 
 export default function Home() {
   return (

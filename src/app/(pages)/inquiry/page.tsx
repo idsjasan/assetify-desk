@@ -13,6 +13,7 @@ import {
 } from "@/app/(pages)/inquiry/(atoms)/useInquiryFormStore";
 import { useInquiryForm } from "@/app/(pages)/inquiry/(hooks)/useInquiryForm";
 import { useInquiryOptions } from "@/app/(pages)/inquiry/(hooks)/useInquiryOptions";
+import Header from "@/shared/components/common/header";
 import FileInput from "@/shared/components/form/file-input";
 import {
   FormField,
@@ -23,7 +24,6 @@ import {
   TextInput,
 } from "@/shared/components/form/form-fields";
 import SubmitButton from "@/shared/components/form/submit-button";
-import Header from "@/shared/components/header";
 
 export default function Inquiry() {
   const { data: options, isLoading, error } = useInquiryOptions();
@@ -33,6 +33,7 @@ export default function Inquiry() {
   const [자산번호, set자산번호] = useAtom(자산번호Atom);
   const [문의유형, set문의유형] = useAtom(문의유형Atom);
   const [문의내용, set문의내용] = useAtom(문의내용Atom);
+  const [첨부파일, set첨부파일] = useAtom(첨부파일Atom);
   const [긴급도, set긴급도] = useAtom(긴급도Atom);
 
   const { isSubmitting, handleSubmit } = useInquiryForm();
@@ -109,11 +110,7 @@ export default function Inquiry() {
           title="첨부 파일"
           description="대외비 등 민감한 자료는 업로드하지 마세요."
         >
-          <FileInput
-            atom={첨부파일Atom}
-            accept="image/*,.pdf,.doc,.docx,xlsx,.hwp"
-            multiple
-          />
+          <FileInput value={첨부파일} onChange={set첨부파일} />
         </FormField>
         <FormField title="긴급도" required>
           <RadioOption

@@ -23,8 +23,8 @@ export const useInquiryForm = (): UseInquiryFormReturn => {
   const [자산번호] = useAtom(자산번호Atom);
   const [문의유형] = useAtom(문의유형Atom);
   const [문의내용] = useAtom(문의내용Atom);
-  const [긴급도] = useAtom(긴급도Atom);
   const [첨부파일] = useAtom(첨부파일Atom);
+  const [긴급도] = useAtom(긴급도Atom);
 
   const [, set법인명] = useAtom(법인Atom);
   const [, set부서] = useAtom(부서Atom);
@@ -32,6 +32,7 @@ export const useInquiryForm = (): UseInquiryFormReturn => {
   const [, set자산번호] = useAtom(자산번호Atom);
   const [, set문의유형] = useAtom(문의유형Atom);
   const [, set문의내용] = useAtom(문의내용Atom);
+  const [, set첨부파일] = useAtom(첨부파일Atom);
   const [, set긴급도] = useAtom(긴급도Atom);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -43,6 +44,7 @@ export const useInquiryForm = (): UseInquiryFormReturn => {
     set자산번호("");
     set문의유형("");
     set문의내용("");
+    set첨부파일([]);
     set긴급도("");
   };
 
@@ -57,6 +59,7 @@ export const useInquiryForm = (): UseInquiryFormReturn => {
       formData.append("자산번호", 자산번호);
       formData.append("문의유형", 문의유형);
       formData.append("문의내용", 문의내용);
+
       formData.append("긴급도", 긴급도);
 
       첨부파일.forEach((file) => {
@@ -65,7 +68,7 @@ export const useInquiryForm = (): UseInquiryFormReturn => {
 
       resetForm();
 
-      const response = await fetch("/api/inquiry/ticket", {
+      const _response = await fetch("/api/inquiry/ticket", {
         method: "POST",
         body: formData,
       });
