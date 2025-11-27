@@ -11,7 +11,13 @@ export const useInquiryOptions = () => {
     queryKey: ["inquiryOptions"],
     queryFn: async () => {
       const response = await fetch("/api/inquiry/options");
-      return response.json();
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw data;
+      }
+
+      return data;
     },
     staleTime: 1000 * 60 * 5,
   });

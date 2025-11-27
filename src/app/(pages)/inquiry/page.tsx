@@ -12,7 +12,9 @@ import {
 } from "@/app/(pages)/inquiry/(atoms)/useInquiryFormStore";
 import { useInquiryForm } from "@/app/(pages)/inquiry/(hooks)/useInquiryForm";
 import { useInquiryOptions } from "@/app/(pages)/inquiry/(hooks)/useInquiryOptions";
+import ErrorComponent from "@/shared/components/common/errorComponent";
 import Header from "@/shared/components/common/header";
+import LoadingComponent from "@/shared/components/common/loadingComponent";
 import {
   FormField,
   FormFieldList,
@@ -36,11 +38,11 @@ export default function Inquiry() {
   const { isSubmitting, handleSubmit } = useInquiryForm();
 
   if (isLoading) {
-    return "로딩중";
+    return <LoadingComponent />;
   }
 
   if (error) {
-    return "실패함";
+    return <ErrorComponent errorMessage={error.message} />;
   }
 
   return (

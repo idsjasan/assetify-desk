@@ -43,11 +43,13 @@ export const useInquiryForm = (): UseInquiryFormReturn => {
         body: formData,
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error("문의 등록에 실패했습니다");
+        throw data;
       }
 
-      return response.json();
+      return data;
     },
     onSuccess: (data) => {
       router.push(`/inquiry/ticket/${data.id}`);

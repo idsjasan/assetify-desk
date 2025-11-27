@@ -1,16 +1,6 @@
 const NOTION_API_VERSION = "2025-09-03";
 const NOTION_BASE_URL = "https://api.notion.com/v1";
 
-export class NotionApiError extends Error {
-  constructor(
-    public readonly data: unknown,
-    public readonly status: number,
-  ) {
-    super("Notion API Error");
-    this.name = "NotionApiError";
-  }
-}
-
 export async function notionRequest<T>(
   endpoint: string,
   options?: {
@@ -36,7 +26,7 @@ export async function notionRequest<T>(
 
   if (!response.ok) {
     const errorData = await response.json();
-    throw new NotionApiError(errorData, response.status);
+    throw { data: errorData, status: response.status };
   }
 
   return response.json();

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { InquiryRetrieveData } from "@/app/(api)/api/inquiry/types";
-import { NotionApiError, notionRequest } from "@/shared/lib/notion";
+import { notionRequest } from "@/shared/lib/notion";
 
 export async function GET() {
   try {
@@ -22,8 +22,13 @@ export async function GET() {
 
     return NextResponse.json(response);
   } catch (error) {
-    if (error instanceof NotionApiError) {
-      return NextResponse.json(error.data, { status: error.status });
+    if (
+      error &&
+      typeof error === "object" &&
+      "data" in error &&
+      "status" in error
+    ) {
+      return NextResponse.json(error.data, { status: error.status as number });
     }
     return NextResponse.json(
       { message: "Internal Server Error" },
