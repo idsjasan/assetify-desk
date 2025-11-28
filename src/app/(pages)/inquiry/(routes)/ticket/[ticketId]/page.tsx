@@ -3,29 +3,29 @@
 import { useAtom } from "jotai";
 import { use } from "react";
 import {
-  TicketCreatedTimeAtom,
-  Ticket긴급도Atom,
-  Ticket담당자Atom,
-  Ticket문의내용Atom,
-  Ticket문의유형Atom,
-  Ticket문의자Atom,
-  Ticket법인Atom,
-  Ticket부서Atom,
-  Ticket상태Atom,
-  Ticket자산번호Atom,
+  InquiryTicketCreatedTimeAtom,
+  InquiryTicket긴급도Atom,
+  InquiryTicket담당자Atom,
+  InquiryTicket문의내용Atom,
+  InquiryTicket문의유형Atom,
+  InquiryTicket문의자Atom,
+  InquiryTicket법인Atom,
+  InquiryTicket부서Atom,
+  InquiryTicket상태Atom,
+  InquiryTicket자산번호Atom,
 } from "@/app/(pages)/inquiry/(atoms)/useInquiryTicketStore";
 import { useInquiryTicket } from "@/app/(pages)/inquiry/(hooks)/useInquiryTicket";
+import Container from "@/shared/components/common/container";
+import ErrorComponent from "@/shared/components/common/errorComponent";
+import Header from "@/shared/components/common/header";
+import LoadingComponent from "@/shared/components/common/loadingComponent";
 import CopyLinkButton from "@/shared/components/form/copyLinkButton";
+import { FormFieldList } from "@/shared/components/form/form-fields";
 import {
   TicketDetailCard,
   TicketDetailInfo,
   TicketDetailStatus,
 } from "@/shared/components/form/ticketDetailCards";
-import Container from "@/shared/components/common/container";
-import ErrorComponent from "@/shared/components/common/errorComponent";
-import Header from "@/shared/components/common/header";
-import LoadingComponent from "@/shared/components/common/loadingComponent";
-import { FormFieldList } from "@/shared/components/form/form-fields";
 
 export default function InquiryTicket({
   params,
@@ -35,16 +35,16 @@ export default function InquiryTicket({
   const { ticketId } = use(params);
   const { isLoading, error } = useInquiryTicket(ticketId);
 
-  const [법인] = useAtom(Ticket법인Atom);
-  const [부서] = useAtom(Ticket부서Atom);
-  const [문의자] = useAtom(Ticket문의자Atom);
-  const [자산번호] = useAtom(Ticket자산번호Atom);
-  const [문의유형] = useAtom(Ticket문의유형Atom);
-  const [문의내용] = useAtom(Ticket문의내용Atom);
-  const [긴급도] = useAtom(Ticket긴급도Atom);
-  const [상태] = useAtom(Ticket상태Atom);
-  const [담당자] = useAtom(Ticket담당자Atom);
-  const [createdTime] = useAtom(TicketCreatedTimeAtom);
+  const [법인] = useAtom(InquiryTicket법인Atom);
+  const [부서] = useAtom(InquiryTicket부서Atom);
+  const [문의자] = useAtom(InquiryTicket문의자Atom);
+  const [자산번호] = useAtom(InquiryTicket자산번호Atom);
+  const [문의유형] = useAtom(InquiryTicket문의유형Atom);
+  const [문의내용] = useAtom(InquiryTicket문의내용Atom);
+  const [긴급도] = useAtom(InquiryTicket긴급도Atom);
+  const [상태] = useAtom(InquiryTicket상태Atom);
+  const [담당자] = useAtom(InquiryTicket담당자Atom);
+  const [createdTime] = useAtom(InquiryTicketCreatedTimeAtom);
 
   if (isLoading) {
     return <LoadingComponent />;

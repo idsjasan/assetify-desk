@@ -2,14 +2,19 @@
 
 import { useAtom } from "jotai";
 import {
-  Form긴급도Atom,
-  Form문의내용Atom,
-  Form문의유형Atom,
-  Form문의자Atom,
-  Form법인Atom,
-  Form부서Atom,
-  Form자산번호Atom,
+  InquiryForm긴급도Atom,
+  InquiryForm문의내용Atom,
+  InquiryForm문의유형Atom,
+  InquiryForm문의자Atom,
+  InquiryForm법인Atom,
+  InquiryForm부서Atom,
+  InquiryForm자산번호Atom,
 } from "@/app/(pages)/inquiry/(atoms)/useInquiryFormStore";
+import {
+  InquiryOptions긴급도Atom,
+  InquiryOptions문의유형Atom,
+  InquiryOptions법인Atom,
+} from "@/app/(pages)/inquiry/(atoms)/useInquiryOptionsStore";
 import { useInquiryForm } from "@/app/(pages)/inquiry/(hooks)/useInquiryForm";
 import { useInquiryOptions } from "@/app/(pages)/inquiry/(hooks)/useInquiryOptions";
 import Container from "@/shared/components/common/container";
@@ -27,14 +32,19 @@ import {
 import SubmitButton from "@/shared/components/form/submit-button";
 
 export default function Inquiry() {
-  const { data: options, isLoading, error } = useInquiryOptions();
-  const [법인, set법인명] = useAtom(Form법인Atom);
-  const [부서, set부서] = useAtom(Form부서Atom);
-  const [문의자, set문의자] = useAtom(Form문의자Atom);
-  const [자산번호, set자산번호] = useAtom(Form자산번호Atom);
-  const [문의유형, set문의유형] = useAtom(Form문의유형Atom);
-  const [문의내용, set문의내용] = useAtom(Form문의내용Atom);
-  const [긴급도, set긴급도] = useAtom(Form긴급도Atom);
+  const { isLoading, error } = useInquiryOptions();
+
+  const [법인Options] = useAtom(InquiryOptions법인Atom);
+  const [문의유형Options] = useAtom(InquiryOptions문의유형Atom);
+  const [긴급도Options] = useAtom(InquiryOptions긴급도Atom);
+
+  const [법인, set법인명] = useAtom(InquiryForm법인Atom);
+  const [부서, set부서] = useAtom(InquiryForm부서Atom);
+  const [문의자, set문의자] = useAtom(InquiryForm문의자Atom);
+  const [자산번호, set자산번호] = useAtom(InquiryForm자산번호Atom);
+  const [문의유형, set문의유형] = useAtom(InquiryForm문의유형Atom);
+  const [문의내용, set문의내용] = useAtom(InquiryForm문의내용Atom);
+  const [긴급도, set긴급도] = useAtom(InquiryForm긴급도Atom);
 
   const { isSubmitting, handleSubmit } = useInquiryForm();
 
@@ -52,7 +62,7 @@ export default function Inquiry() {
       <FormFieldList onSubmit={handleSubmit}>
         <FormField title="법인명" required>
           <SelectOption
-            options={options?.법인 || []}
+            options={법인Options}
             value={법인}
             onChange={set법인명}
             required
@@ -89,7 +99,7 @@ export default function Inquiry() {
           required
         >
           <RadioOption
-            options={options?.문의유형 || []}
+            options={문의유형Options}
             value={문의유형}
             onChange={set문의유형}
           />
@@ -108,7 +118,7 @@ export default function Inquiry() {
         </FormField>
         <FormField title="긴급도" required>
           <RadioOption
-            options={options?.긴급도 || []}
+            options={긴급도Options}
             value={긴급도}
             onChange={set긴급도}
             required

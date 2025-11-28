@@ -1,16 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import { useAtom } from "jotai";
 import {
-  TicketCreatedTimeAtom,
-  Ticket긴급도Atom,
-  Ticket담당자Atom,
-  Ticket문의내용Atom,
-  Ticket문의유형Atom,
-  Ticket문의자Atom,
-  Ticket법인Atom,
-  Ticket부서Atom,
-  Ticket상태Atom,
-  Ticket자산번호Atom,
+  InquiryTicketCreatedTimeAtom,
+  InquiryTicket긴급도Atom,
+  InquiryTicket담당자Atom,
+  InquiryTicket문의내용Atom,
+  InquiryTicket문의유형Atom,
+  InquiryTicket문의자Atom,
+  InquiryTicket법인Atom,
+  InquiryTicket부서Atom,
+  InquiryTicket상태Atom,
+  InquiryTicket자산번호Atom,
 } from "@/app/(pages)/inquiry/(atoms)/useInquiryTicketStore";
 
 interface TicketData {
@@ -26,23 +26,17 @@ interface TicketData {
   createdAt: string;
 }
 
-interface UseInquiryTicketReturn {
-  isLoading: boolean;
-  isError: boolean;
-  error: Error | null;
-}
-
-export const useInquiryTicket = (ticketId: string): UseInquiryTicketReturn => {
-  const [, set법인] = useAtom(Ticket법인Atom);
-  const [, set부서] = useAtom(Ticket부서Atom);
-  const [, set문의자] = useAtom(Ticket문의자Atom);
-  const [, set자산번호] = useAtom(Ticket자산번호Atom);
-  const [, set문의유형] = useAtom(Ticket문의유형Atom);
-  const [, set문의내용] = useAtom(Ticket문의내용Atom);
-  const [, set긴급도] = useAtom(Ticket긴급도Atom);
-  const [, set상태] = useAtom(Ticket상태Atom);
-  const [, set담당자] = useAtom(Ticket담당자Atom);
-  const [, setCreatedTime] = useAtom(TicketCreatedTimeAtom);
+export const useInquiryTicket = (ticketId: string) => {
+  const [, set법인] = useAtom(InquiryTicket법인Atom);
+  const [, set부서] = useAtom(InquiryTicket부서Atom);
+  const [, set문의자] = useAtom(InquiryTicket문의자Atom);
+  const [, set자산번호] = useAtom(InquiryTicket자산번호Atom);
+  const [, set문의유형] = useAtom(InquiryTicket문의유형Atom);
+  const [, set문의내용] = useAtom(InquiryTicket문의내용Atom);
+  const [, set긴급도] = useAtom(InquiryTicket긴급도Atom);
+  const [, set상태] = useAtom(InquiryTicket상태Atom);
+  const [, set담당자] = useAtom(InquiryTicket담당자Atom);
+  const [, setCreatedTime] = useAtom(InquiryTicketCreatedTimeAtom);
 
   return useQuery<TicketData>({
     queryKey: ["inquiryTicket", ticketId],
