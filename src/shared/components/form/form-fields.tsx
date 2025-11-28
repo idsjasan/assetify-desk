@@ -48,7 +48,7 @@ export function FormField({
           <span className="text-core-accent">{required && "*"}</span>
         </span>
         {description && (
-          <span className="text-content-standard-secondary text-label">
+          <span className="whitespace-pre-wrap text-content-standard-secondary text-label">
             {description}
           </span>
         )}
@@ -163,5 +163,32 @@ export function RadioOption({
         </label>
       ))}
     </div>
+  );
+}
+
+interface CheckboxOptionProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, "onChange" | "type"> {
+  label: string;
+  onChange?: (checked: boolean) => void;
+  checked?: boolean;
+}
+
+export function CheckboxOption({
+  label,
+  onChange,
+  checked,
+  ...props
+}: CheckboxOptionProps) {
+  return (
+    <label className="flex w-full cursor-pointer items-center gap-spacing-300 rounded-radius-400 border border-line-outline bg-components-fill-standard-secondary px-spacing-400 py-spacing-300 text-body duration-100 hover:border-core-accent hover:ring-1 hover:ring-core-accent">
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={(e) => onChange?.(e.target.checked)}
+        className="accent-core-accent"
+        {...props}
+      />
+      <span className="text-body">{label}</span>
+    </label>
   );
 }
