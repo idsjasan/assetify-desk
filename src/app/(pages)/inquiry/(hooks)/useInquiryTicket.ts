@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useAtom } from "jotai";
+import { useSetAtom } from "jotai";
 import {
   InquiryTicketCreatedTimeAtom,
   InquiryTicket긴급도Atom,
@@ -27,16 +27,16 @@ interface TicketData {
 }
 
 export const useInquiryTicket = (ticketId: string) => {
-  const [, set법인] = useAtom(InquiryTicket법인Atom);
-  const [, set부서] = useAtom(InquiryTicket부서Atom);
-  const [, set문의자] = useAtom(InquiryTicket문의자Atom);
-  const [, set자산번호] = useAtom(InquiryTicket자산번호Atom);
-  const [, set문의유형] = useAtom(InquiryTicket문의유형Atom);
-  const [, set문의내용] = useAtom(InquiryTicket문의내용Atom);
-  const [, set긴급도] = useAtom(InquiryTicket긴급도Atom);
-  const [, set상태] = useAtom(InquiryTicket상태Atom);
-  const [, set담당자] = useAtom(InquiryTicket담당자Atom);
-  const [, setCreatedTime] = useAtom(InquiryTicketCreatedTimeAtom);
+  const set법인 = useSetAtom(InquiryTicket법인Atom);
+  const set부서 = useSetAtom(InquiryTicket부서Atom);
+  const set문의자 = useSetAtom(InquiryTicket문의자Atom);
+  const set자산번호 = useSetAtom(InquiryTicket자산번호Atom);
+  const set문의유형 = useSetAtom(InquiryTicket문의유형Atom);
+  const set문의내용 = useSetAtom(InquiryTicket문의내용Atom);
+  const set긴급도 = useSetAtom(InquiryTicket긴급도Atom);
+  const set상태 = useSetAtom(InquiryTicket상태Atom);
+  const set담당자 = useSetAtom(InquiryTicket담당자Atom);
+  const setCreatedTime = useSetAtom(InquiryTicketCreatedTimeAtom);
 
   return useQuery<TicketData>({
     queryKey: ["inquiryTicket", ticketId],

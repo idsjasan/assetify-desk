@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useAtom } from "jotai";
+import { useSetAtom } from "jotai";
 import {
   RepairOptions고장내역Atom,
   RepairOptions긴급도Atom,
@@ -13,9 +13,9 @@ interface RepairOptionsResponse {
 }
 
 export const useRepairOptions = () => {
-  const [, set법인] = useAtom(RepairOptions법인Atom);
-  const [, set고장내역] = useAtom(RepairOptions고장내역Atom);
-  const [, set긴급도] = useAtom(RepairOptions긴급도Atom);
+  const set법인 = useSetAtom(RepairOptions법인Atom);
+  const set고장내역 = useSetAtom(RepairOptions고장내역Atom);
+  const set긴급도 = useSetAtom(RepairOptions긴급도Atom);
 
   return useQuery<RepairOptionsResponse>({
     queryKey: ["repairOptions"],

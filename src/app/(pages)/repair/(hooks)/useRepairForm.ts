@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { useAtom } from "jotai";
+import { useAtomValue } from "jotai";
 import { useRouter } from "next/navigation";
 import {
   RepairForm고장내역Atom,
@@ -21,15 +21,15 @@ interface UseRepairFormReturn {
 export const useRepairForm = (): UseRepairFormReturn => {
   const router = useRouter();
 
-  const [법인] = useAtom(RepairForm법인Atom);
-  const [부서] = useAtom(RepairForm부서Atom);
-  const [문의자] = useAtom(RepairForm문의자Atom);
-  const [실제근무위치] = useAtom(RepairForm실제근무위치Atom);
-  const [자산번호] = useAtom(RepairForm자산번호Atom);
-  const [고장내역] = useAtom(RepairForm고장내역Atom);
-  const [고장증상] = useAtom(RepairForm고장증상Atom);
-  const [긴급도] = useAtom(RepairForm긴급도Atom);
-  const [수리진행동의서] = useAtom(RepairForm수리진행동의서Atom);
+  const 법인 = useAtomValue(RepairForm법인Atom);
+  const 부서 = useAtomValue(RepairForm부서Atom);
+  const 문의자 = useAtomValue(RepairForm문의자Atom);
+  const 실제근무위치 = useAtomValue(RepairForm실제근무위치Atom);
+  const 자산번호 = useAtomValue(RepairForm자산번호Atom);
+  const 고장내역 = useAtomValue(RepairForm고장내역Atom);
+  const 고장증상 = useAtomValue(RepairForm고장증상Atom);
+  const 긴급도 = useAtomValue(RepairForm긴급도Atom);
+  const 수리진행동의서 = useAtomValue(RepairForm수리진행동의서Atom);
 
   const { mutateAsync, isPending } = useMutation({
     mutationFn: async () => {

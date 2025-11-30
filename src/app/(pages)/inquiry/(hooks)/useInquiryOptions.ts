@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useAtom } from "jotai";
+import { useSetAtom } from "jotai";
 import {
   InquiryOptions긴급도Atom,
   InquiryOptions문의유형Atom,
@@ -13,9 +13,9 @@ interface InquiryOptionsResponse {
 }
 
 export const useInquiryOptions = () => {
-  const [, set법인] = useAtom(InquiryOptions법인Atom);
-  const [, set문의유형] = useAtom(InquiryOptions문의유형Atom);
-  const [, set긴급도] = useAtom(InquiryOptions긴급도Atom);
+  const set법인 = useSetAtom(InquiryOptions법인Atom);
+  const set문의유형 = useSetAtom(InquiryOptions문의유형Atom);
+  const set긴급도 = useSetAtom(InquiryOptions긴급도Atom);
 
   return useQuery<InquiryOptionsResponse>({
     queryKey: ["inquiryOptions"],

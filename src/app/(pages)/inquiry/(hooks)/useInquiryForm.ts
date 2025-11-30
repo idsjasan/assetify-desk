@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { useAtom } from "jotai";
+import { useAtomValue } from "jotai";
 import { useRouter } from "next/navigation";
 import {
   InquiryForm긴급도Atom,
@@ -19,13 +19,13 @@ interface UseInquiryFormReturn {
 export const useInquiryForm = (): UseInquiryFormReturn => {
   const router = useRouter();
 
-  const [법인] = useAtom(InquiryForm법인Atom);
-  const [부서] = useAtom(InquiryForm부서Atom);
-  const [문의자] = useAtom(InquiryForm문의자Atom);
-  const [자산번호] = useAtom(InquiryForm자산번호Atom);
-  const [문의유형] = useAtom(InquiryForm문의유형Atom);
-  const [문의내용] = useAtom(InquiryForm문의내용Atom);
-  const [긴급도] = useAtom(InquiryForm긴급도Atom);
+  const 법인 = useAtomValue(InquiryForm법인Atom);
+  const 부서 = useAtomValue(InquiryForm부서Atom);
+  const 문의자 = useAtomValue(InquiryForm문의자Atom);
+  const 자산번호 = useAtomValue(InquiryForm자산번호Atom);
+  const 문의유형 = useAtomValue(InquiryForm문의유형Atom);
+  const 문의내용 = useAtomValue(InquiryForm문의내용Atom);
+  const 긴급도 = useAtomValue(InquiryForm긴급도Atom);
 
   const { mutateAsync, isPending } = useMutation({
     mutationFn: async () => {
