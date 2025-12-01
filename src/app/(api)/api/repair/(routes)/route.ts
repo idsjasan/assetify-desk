@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import type { RepairCreatePageData } from "@/app/(api)/api/repair/types";
 import { notionRequest } from "@/shared/lib/notion";
 
 export async function POST(request: Request) {
@@ -35,7 +34,7 @@ export async function POST(request: Request) {
       },
     };
 
-    const notionResponse = await notionRequest<RepairCreatePageData>("/pages", {
+    const notionResponse = await notionRequest<any>("/pages", {
       method: "POST",
       body,
     });

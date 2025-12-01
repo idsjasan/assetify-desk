@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import type { InquiryCreatePageData } from "@/app/(api)/api/inquiry/types";
 import { notionRequest } from "@/shared/lib/notion";
 
 export async function POST(request: Request) {
@@ -29,7 +28,7 @@ export async function POST(request: Request) {
       },
     };
 
-    const notionResponse = await notionRequest<InquiryCreatePageData>(
+    const notionResponse = await notionRequest<any>(
       "/pages",
       {
         method: "POST",

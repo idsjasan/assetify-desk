@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server.js";
-import type { InquiryRetrievePageData } from "@/app/(api)/api/inquiry/types";
 import { notionRequest } from "@/shared/lib/notion";
 import formatDateTime from "@/shared/utils/formatDateTime";
 
@@ -12,7 +11,7 @@ export async function GET(_: NextRequest, context: RouteContext) {
   try {
     const { ticketId } = await context.params;
 
-    const notionResponse = await notionRequest<InquiryRetrievePageData>(
+    const notionResponse = await notionRequest<any>(
       `/pages/${ticketId}`,
       {
         method: "GET",

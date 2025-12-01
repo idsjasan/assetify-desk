@@ -1,10 +1,9 @@
 import { NextResponse } from "next/server";
-import type { RepairRetrieveData } from "@/app/(api)/api/repair/types";
 import { notionRequest } from "@/shared/lib/notion";
 
 export async function GET() {
   try {
-    const notionResponse = await notionRequest<RepairRetrieveData>(
+    const notionResponse = await notionRequest<any>(
       `/data_sources/${process.env.REPAIR_TICKETS_DATA_SOURCE_ID}`,
     );
 

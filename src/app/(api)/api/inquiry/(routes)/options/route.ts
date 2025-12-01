@@ -1,10 +1,9 @@
 import { NextResponse } from "next/server";
-import type { InquiryRetrieveData } from "@/app/(api)/api/inquiry/types";
 import { notionRequest } from "@/shared/lib/notion";
 
 export async function GET() {
   try {
-    const notionResponse = await notionRequest<InquiryRetrieveData>(
+    const notionResponse = await notionRequest<any>(
       `/data_sources/${process.env.INQUIRY_TICKETS_DATA_SOURCE_ID}`,
     );
 
