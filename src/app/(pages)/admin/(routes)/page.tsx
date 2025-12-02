@@ -1,20 +1,34 @@
 "use client";
 
 import { useAtom, useAtomValue } from "jotai";
-import { AdminForm비밀번호Atom } from "@/app/(pages)/admin/(atoms)/useAdminFormStore";
+import { useEffect } from "react";
+import { AdminForm비밀번호Atom, AdminForm비밀번호저장Atom } from "@/app/(pages)/admin/(atoms)/useAdminFormStore";
 import { AdminIsCopiedAtom, AdminLicenseLinkAtom } from "@/app/(pages)/admin/(atoms)/useAdminStore";
 import { useAdminForm } from "@/app/(pages)/admin/(hooks)/useAdminForm";
 import Container from "@/shared/components/common/container";
 import Header from "@/shared/components/common/header";
-import { FormField, FormFieldList, TextInput } from "@/shared/components/form/form-fields";
+import { CheckboxOption, FormField, FormFieldList, TextInput } from "@/shared/components/form/form-fields";
 import SubmitButton from "@/shared/components/form/submit-button";
+import { hasStoredPassword, loadPassword } from "@/shared/utils/encryptPassword";
 
 export default function Admin() {
   const [비밀번호, set비밀번호] = useAtom(AdminForm비밀번호Atom);
+  const [비밀번호저장, set비밀번호저장] = useAtom(AdminForm비밀번호저장Atom);
   const licenseLink = useAtomValue(AdminLicenseLinkAtom);
   const isCopied = useAtomValue(AdminIsCopiedAtom);
 
   const { isSubmitting, handleSubmit, error } = useAdminForm();
+
+  useEffect(() => {
+    const loadSavedPassword = async () => {
+      if (hasStoredPassword()) {
+        const savedPassword = await loadPassword();
+        set비밀번호(savedPassword);
+        set비밀번호저장(true);
+      }
+    };
+    loadSavedPassword();
+  }, [set비밀번호, set비밀번호저장]);
 
   return (
     <Container>
@@ -22,6 +36,11 @@ export default function Admin() {
       <FormFieldList onSubmit={handleSubmit}>
         <FormField title="라이선스 조회 링크 생성" required>
           <TextInput type="password" required placeholder="비밀번호" value={비밀번호} onChange={set비밀번호} />
+          <CheckboxOption
+            label="비밀번호 저장 (암호화되어 저장됩니다)"
+            checked={비밀번호저장}
+            onChange={set비밀번호저장}
+          />
         </FormField>
         <SubmitButton text="생성하기" isLoading={isSubmitting} />
       </FormFieldList>
