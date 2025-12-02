@@ -32,7 +32,7 @@ export default function Admin() {
 
   return (
     <Container>
-      <Header title="Assetify" highlighted="Desk" />
+      <Header title="Admin" highlighted="Tools" />
       <FormFieldList onSubmit={handleSubmit}>
         <FormField title="라이선스 조회 링크 생성" required>
           <TextInput type="password" required placeholder="비밀번호" value={비밀번호} onChange={set비밀번호} />
