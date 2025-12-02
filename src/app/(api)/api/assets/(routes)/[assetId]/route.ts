@@ -2,14 +2,13 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { notionRequest } from "@/shared/lib/notion";
 
-type RequestBody = {
-  assetId: string;
+type RouteContext = {
+  params: Promise<{ assetId: string }>;
 };
 
-export async function POST(request: NextRequest) {
+export async function GET(_: NextRequest, context: RouteContext) {
   try {
-    const body = (await request.json()) as RequestBody;
-    const { assetId } = body;
+    const { assetId } = await context.params;
 
     const notionResponse = await notionRequest<any>(`/data_source/${process.env.ASSETS_DATA_SOURCE_ID}/query`, {
       method: "POST",
