@@ -22,10 +22,7 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  if (
-    (pathname.startsWith("/api/license") || pathname === "/api/session/query") &&
-    pathname !== "/api/session"
-  ) {
+  if ((pathname.startsWith("/api/license") || pathname === "/api/session/query") && pathname !== "/api/session") {
     const sessionId = request.headers.get("x-session-id");
 
     if (!sessionId) {
