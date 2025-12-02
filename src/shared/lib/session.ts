@@ -1,8 +1,6 @@
-import { randomUUID } from "node:crypto";
 import { jwtVerify, SignJWT } from "jose";
 
 export interface Session {
-  id: string;
   createdAt: number;
   expiresAt: number;
 }
@@ -15,19 +13,15 @@ const getSecretKey = () => {
 };
 
 export async function createSession(): Promise<{ session: Session; token: string }> {
-  const id = randomUUID();
   const createdAt = Date.now();
   const expiresAt = createdAt + SESSION_DURATION;
 
   const session: Session = {
-    id,
     createdAt,
     expiresAt,
   };
 
   const token = await new SignJWT({
-    sessionId: id,
-    createdAt,
     expiresAt,
   })
     .setProtectedHeader({ alg: "HS256" })
@@ -56,15 +50,14 @@ export async function getSession(token: string): Promise<Session | null> {
     const { payload } = await jwtVerify(token, getSecretKey());
 
     const expiresAt = payload.expiresAt as number;
-    const createdAt = payload.createdAt as number;
-    const sessionId = payload.sessionId as string;
 
     if (expiresAt < Date.now()) {
       return null;
     }
 
+    const createdAt = expiresAt - SESSION_DURATION;
+
     return {
-      id: sessionId,
       createdAt,
       expiresAt,
     };
