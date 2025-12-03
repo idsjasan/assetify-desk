@@ -4,13 +4,8 @@ import { convertToNotionProperties } from "@/app/(api)/api/assets/(utils)/conver
 import { notionRequest } from "@/shared/lib/notion";
 import formatDateTime from "@/shared/utils/formatDateTime";
 
-type RouteContext = {
-  params: Promise<{ pageId: string }>;
-};
-
-export async function PATCH(request: NextRequest, context: RouteContext) {
+export async function PATCH(request: NextRequest) {
   try {
-    const { pageId } = await context.params;
     const body = await request.json();
 
     if (!body || Object.keys(body).length === 0) {
@@ -23,7 +18,7 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
       return NextResponse.json({ message: "유효한 프로퍼티가 없습니다." }, { status: 400 });
     }
 
-    const notionResponse = await notionRequest<any>(`/pages/${pageId}`, {
+    const notionResponse = await notionRequest<any>(`/pages/${body.pageId}`, {
       method: "PATCH",
       body: {
         properties,
