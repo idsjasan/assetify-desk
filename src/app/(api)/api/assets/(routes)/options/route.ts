@@ -26,6 +26,9 @@ export async function GET() {
       반납사유: (notionResponse.properties.반납사유.select?.options || []).map(
         (option: { name: string }) => option.name,
       ),
+      "누락 사항": (notionResponse.properties["누락 사항"].select?.options || []).map(
+        (option: { name: string }) => option.name,
+      ),
     };
 
     return NextResponse.json(response);
