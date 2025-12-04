@@ -22,6 +22,7 @@ import LoadingComponent from "@/shared/components/common/loadingComponent";
 import CopyLinkButton from "@/shared/components/form/copyLinkButton";
 import { FormFieldList } from "@/shared/components/form/form-fields";
 import { TicketDetailCard, TicketDetailInfo, TicketDetailStatus } from "@/shared/components/form/ticketDetailCards";
+import formatDateTime from "@/shared/utils/formatDateTime";
 
 export default function InquiryTicket({ params }: { params: Promise<{ ticketId: string }> }) {
   const { ticketId } = use(params);
@@ -62,11 +63,11 @@ export default function InquiryTicket({ params }: { params: Promise<{ ticketId: 
           <TicketDetailInfo label="법인" value={법인} />
           <TicketDetailInfo label="부서" value={부서} />
           <TicketDetailInfo label="문의자" value={문의자} />
-          <TicketDetailInfo label="자산번호" value={자산번호} />
-          <TicketDetailInfo label="문의유형" value={문의유형} />
-          <TicketDetailInfo label="문의내용" value={문의내용} />
+          <TicketDetailInfo label="자산 번호" value={자산번호} />
+          <TicketDetailInfo label="문의 유형" value={문의유형} />
+          <TicketDetailInfo label="문의 내용" value={문의내용} />
           <TicketDetailInfo label="긴급도" value={긴급도} />
-          <TicketDetailInfo label="생성일시" value={createdTime} />
+          <TicketDetailInfo label="제출 날짜" value={formatDateTime(createdTime)} />
         </TicketDetailCard>
       </FormFieldList>
     </Container>

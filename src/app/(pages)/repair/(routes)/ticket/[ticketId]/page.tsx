@@ -29,6 +29,8 @@ import LoadingComponent from "@/shared/components/common/loadingComponent";
 import CopyLinkButton from "@/shared/components/form/copyLinkButton";
 import { FormFieldList } from "@/shared/components/form/form-fields";
 import { TicketDetailCard, TicketDetailInfo, TicketDetailStatus } from "@/shared/components/form/ticketDetailCards";
+import formatDateTime from "@/shared/utils/formatDateTime";
+import formatPrice from "@/shared/utils/formatPrice";
 
 export default function RepairTicket({ params }: { params: Promise<{ ticketId: string }> }) {
   const { ticketId } = use(params);
@@ -75,7 +77,7 @@ export default function RepairTicket({ params }: { params: Promise<{ ticketId: s
         <TicketDetailCard className="flex flex-col gap-spacing-100 divide-y divide-line-divider">
           <TicketDetailInfo label="수리 진행 상황" value={수리진행상황} />
           <TicketDetailInfo label="과실 여부" value={과실여부} />
-          <TicketDetailInfo label="단가" value={단가} />
+          <TicketDetailInfo label="단가" value={formatPrice(단가)} />
           <TicketDetailInfo label="조치 내용" value={조치내용} />
           <TicketDetailInfo label="수리 일정" value={수리일정} />
         </TicketDetailCard>
@@ -89,7 +91,7 @@ export default function RepairTicket({ params }: { params: Promise<{ ticketId: s
           <TicketDetailInfo label="고장 증상" value={고장증상} />
           <TicketDetailInfo label="긴급도" value={긴급도} />
           <TicketDetailInfo label="수리 진행 동의서" value={수리진행동의서 ? "동의함" : "동의하지 않음"} />
-          <TicketDetailInfo label="생성일시" value={createdTime} />
+          <TicketDetailInfo label="제출 날짜" value={formatDateTime(createdTime)} />
         </TicketDetailCard>
       </FormFieldList>
     </Container>

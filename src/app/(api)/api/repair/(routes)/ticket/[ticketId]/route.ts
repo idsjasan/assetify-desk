@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server.js";
 import { notionRequest } from "@/shared/lib/notion";
-import formatDateTime from "@/shared/utils/formatDateTime";
 
 type RouteContext = {
   params: Promise<{ ticketId: string }>;
@@ -34,7 +33,7 @@ export async function GET(_: NextRequest, context: RouteContext) {
       단가: notionResponse.properties.단가.number?.toString() ?? "-",
       수리진행상황: notionResponse.properties.수리진행상황.status?.name ?? "-",
 
-      createdAt: formatDateTime(notionResponse.created_time) ?? "-",
+      createdAt: notionResponse.created_time ?? "-",
     };
 
     return NextResponse.json(response);

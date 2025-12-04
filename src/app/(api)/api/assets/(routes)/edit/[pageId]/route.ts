@@ -2,7 +2,6 @@ import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { convertToNotionProperties } from "@/app/(api)/api/assets/(utils)/convertToNotionProperties";
 import { notionRequest } from "@/shared/lib/notion";
-import formatDateTime from "@/shared/utils/formatDateTime";
 
 type RouteContext = {
   params: Promise<{ pageId: string }>;
@@ -59,8 +58,8 @@ export async function PATCH(request: NextRequest, context: RouteContext) {
         반납사유: notionResponse.properties.반납사유?.select?.name ?? "-",
         "누락 사항": notionResponse.properties["누락 사항"]?.multi_select?.map((item: any) => item.name) ?? [],
         기타: notionResponse.properties.기타?.rich_text?.[0]?.text?.content ?? "-",
-        createdAt: formatDateTime(notionResponse.created_time) ?? "-",
-        updatedAt: formatDateTime(notionResponse.last_edited_time) ?? "-",
+        createdAt: notionResponse.created_time ?? "-",
+        updatedAt: notionResponse.last_edited_time ?? "-",
       },
     };
 

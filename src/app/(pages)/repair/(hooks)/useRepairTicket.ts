@@ -35,7 +35,7 @@ interface TicketData {
   담당자: string;
   과실여부: string;
   수리일정: string;
-  단가: string;
+  단가: number;
   수리진행상황: string;
   createdAt: string;
 }

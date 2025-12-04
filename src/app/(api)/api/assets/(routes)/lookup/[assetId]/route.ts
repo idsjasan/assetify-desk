@@ -1,7 +1,6 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import { notionRequest } from "@/shared/lib/notion";
-import formatDateTime from "@/shared/utils/formatDateTime";
 
 type RouteContext = {
   params: Promise<{ assetId: string }>;
@@ -57,8 +56,8 @@ export async function GET(_: NextRequest, context: RouteContext) {
         반납사유: asset.properties.반납사유?.select?.name ?? "-",
         "누락 사항": asset.properties["누락 사항"]?.multi_select?.map((item: any) => item.name) ?? [],
         기타: asset.properties.기타?.rich_text?.[0]?.text?.content ?? "-",
-        createdAt: formatDateTime(asset.created_time) ?? "-",
-        updatedAt: formatDateTime(asset.last_edited_time) ?? "-",
+        createdAt: asset.created_time ?? "-",
+        updatedAt: asset.last_edited_time ?? "-",
       },
     };
 
