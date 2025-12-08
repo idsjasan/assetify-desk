@@ -44,8 +44,11 @@ export function convertToNotionProperties(body: Record<string, any>): Record<str
       case "누락 사항":
         properties[key] = {
           multi_select: Array.isArray(value)
-            ? value.map((item) => ({ name: String(item) }))
-            : [{ name: String(value) }],
+            ? value.map((item) => ({ name: String(item).trim() }))
+            : String(value)
+                .split(",")
+                .map((item) => ({ name: item.trim() }))
+                .filter((item) => item.name !== ""),
         };
         break;
 
