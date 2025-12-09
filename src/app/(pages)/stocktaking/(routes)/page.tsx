@@ -89,7 +89,7 @@ export default function Stocktaking() {
     await submitManual();
   };
 
-  const _handleReset = () => {
+  const handleReset = () => {
     resetFlow();
   };
 
@@ -103,7 +103,17 @@ export default function Stocktaking() {
           </FormField>
           <SubmitButton text="찾아보기" isLoading={isLookingUp} />
         </FormFieldList>
-        {lookupError && <p className="mt-spacing-400 text-body text-core-status-negative">{lookupError.message}</p>}
+        {lookupError && (
+          <>
+            <p className="mt-spacing-400 text-body text-core-status-negative">{lookupError.message}</p>
+
+            <span
+              onClick={handleIncorrect}
+              className="cursor-pointer text-body text-content-standard-tertiary underline duration-100 hover:opacity-75 active:scale-95 active:opacity-50">
+              수동으로 입력하기
+            </span>
+          </>
+        )}
       </Container>
     );
   }
@@ -150,6 +160,11 @@ export default function Stocktaking() {
           </FormFieldList>
         )}
         {confirmError && <p className="text-body text-core-status-negative">{confirmError.message}</p>}
+        <span
+          onClick={handleReset}
+          className="cursor-pointer text-body text-content-standard-tertiary underline duration-100 hover:opacity-75 active:scale-95 active:opacity-50">
+          처음부터 다시하기
+        </span>
       </Container>
     );
   }
@@ -179,6 +194,11 @@ export default function Stocktaking() {
           <SubmitButton text="제출하기" isLoading={isSubmittingManual} />
         </FormFieldList>
         {manualError && <p className="text-body text-core-status-negative">{manualError.message}</p>}
+        <span
+          onClick={handleReset}
+          className="cursor-pointer text-body text-content-standard-tertiary underline duration-100 hover:opacity-75 active:scale-95 active:opacity-50">
+          처음부터 다시하기
+        </span>
       </Container>
     );
   }

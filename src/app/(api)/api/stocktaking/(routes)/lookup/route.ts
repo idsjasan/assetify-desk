@@ -23,7 +23,10 @@ export async function POST(request: Request) {
     });
 
     if (notionResponse.results.length === 0) {
-      return NextResponse.json({ message: "해당 자산번호를 찾을 수 없습니다." }, { status: 404 });
+      return NextResponse.json(
+        { message: "해당 자산번호를 찾을 수 없습니다. 수동으로 입력해주세요." },
+        { status: 404 },
+      );
     }
 
     const asset = notionResponse.results[0];
